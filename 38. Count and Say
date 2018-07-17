@@ -1,0 +1,53 @@
+class Solution:
+    
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+
+        strtemp = "0"
+        if n==1:
+            strtemp = "1"
+            return str(strtemp) #需要以字符串的形式返回
+        
+        for i in range(n):
+            print("i:"+str(i))
+            if i==0:
+                strtemp = "1"
+                print("当i等于1时："+str(strtemp))
+            else:
+                print("前一个返回结果为"+str(strtemp))
+                strtemp = self.coutAndS(strtemp)
+                print("操作返回结果为"+str(strtemp))
+        return str(strtemp) 
+        
+        
+        #11
+
+    def coutAndS(self,temp):
+        print("传入为"+str(temp))
+        count = 1
+        strtemp = ""
+        for i in range(len(temp)):
+            #应该是我的判断方式有误,主要的问题就是在这个前后判断的地方，原来是直接i+1怕最后一个i溢出，所以在range的时候就少取了一位
+           
+            j = i+1
+            if j < len(temp):
+                if temp[i]==temp[i+1]:
+                    count+=1
+                else:
+                    s = str(count)+temp[i]
+                    strtemp+=s
+                    count = 1
+            #问题就是在这里，如果j不满足的话，以前就没有返回结果，所以一直出错
+            else:
+                s = str(count)+temp[i]
+                strtemp+=s
+                    
+        return strtemp
+                    
+        
+# if __name__ == "__main__":
+#     Solution().countAndSay(4) 
+
