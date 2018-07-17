@@ -1,0 +1,23 @@
+class Solution:
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # 1356 /2
+        #就是一个插入法排序
+        #是考虑不完全i的位置
+        #从尾端进行比较，如果待查找插入target的比当前的i对应的值要小，那么i往前移，否则有两个情况，一个是等于就返回i，否则插在i的后面
+        #考虑极端情况，i=0这个位置，i>=0的时候都是有值可以比较的，但是当i=0的时候还没有匹配成功就应该插入在0的位置上，否则i往前移
+        i = len(nums)-1
+        while i>=0 and target<nums[i]:
+            if i==0:
+                return 0
+            else:
+                i-=1
+        if target==nums[i]:
+            return i
+        else:
+            return i+1
+    
