@@ -1,0 +1,46 @@
+class Solution:
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        
+        #题目都没读懂  先数个数，然后再读
+        # 先读    1   读作 1个1 所以是11
+        # 再来读  11  读作 2个1 所以是21
+        #         21  读作 1个2 1 个 1 所以是1211
+                  # 1211 读作 1个1 1个2 2个1 所以是111221
+            
+            #可以得出规律，对于n表示的值为n-1的读数  ，如果前后相邻则记数位+1，否则读单个
+            
+        # n = 1, s = 1
+        # n = 2, s = 11
+        # n = 3, s = 21
+        # n = 4, s = 1211
+        # n = 5, s = 111221
+        # ...
+        # n = i, s = ?
+        
+        #应该是一个递归操作ba
+        while n>=1:
+            
+            n-=1
+        if n==1:
+            return 1
+        
+        #如何递归调用？ Line 27: NameError: name 'countAndSay' is not defined
+        s = countAndSay(n-1)
+        stemp = ""
+        
+        count = 1
+        for i in range(len(s)-1):
+            
+            if s[i]==s[i+1]:
+                count+=1
+            else:
+                stemp+=str(count)+s[i]
+                count = 1
+        return stemp
+                    
+        
+        
