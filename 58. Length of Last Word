@@ -4,7 +4,9 @@ class Solution:
         :type s: str
         :rtype: int
         """
-        #不能够使用python中的字符串的函数是吧
+        #不能够使用python中的字符串的函数是吧,一行代码就可以解决啊
+        #return len(s.strip().split(" ")[-1])
+        
         
         length_s = len(s)
         index = length_s - 1
@@ -15,3 +17,4 @@ class Solution:
         while index>=0 and s[index]!=" ":
             index -= 1
         return temp - index
+        
