@@ -1,0 +1,57 @@
+class Solution:
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: void Do not return anything, modify nums1 in-place instead.
+        """
+        #前面已经合并过两个有序链表
+        
+        # in-place
+        # 每次插入需要移动
+        # 第一个数组空间足够大，同时知道两个数组长度为m，n 最后的长度就是m+n
+        
+        
+        #======下面的一直在后移数组，肯定有问题
+#         i = 0
+#         j = 0
+#         while i < m and j <n:
+            
+#             #如果i对应的值一直处于小的则往后移动
+#             if nums1[i] <= nums2[j]:
+#                 i += 1
+#             # 如果i对应的值大于j对应的值，就将j插入在i的位置，i原来以后的值一直往后移动
+#             else:
+#                 t_i = n
+#                 while t_i>=i:
+#                     nums1[t_i+1] = nums1[t_i]
+#                     t_i -=1
+#                 nums1[i] = nums2[j]
+#                 j += 1
+#         if i>=m:
+#             nums1[]
+
+        #从后面比较大的放在最后面
+        max_length = m + n - 1
+        m_i = m - 1
+        n_j = n -1
+        while m_i>=0 and n_j>=0:
+            if nums1[m_i]>=nums2[n_j]:
+                nums1[max_length] = nums1[m_i]
+                m_i -=1
+            else:
+                nums1[max_length] = nums2[n_j]
+                n_j -=1
+            max_length -=1
+            
+        #判断退出循环的条件
+        #若果m先循环完，而n没有循环完就需要将n的未完成部分整体移动到m中，而且因为n先前-1，所以需要加回来
+        if m_i<0:
+            nums1[:n_j+1] = nums2[:n_j+1]
+        
+       
+                
+                    
+        
