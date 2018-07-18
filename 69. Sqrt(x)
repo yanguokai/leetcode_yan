@@ -1,0 +1,48 @@
+class Solution:
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        #需要实现基本开方函数，当然不能够直接导入库，调用开方函数吧
+        #求出的数向下取整
+        # x = m**2
+        # 忘记考虑0
+        # i = 1
+        # if x==0 or x==1:
+        #     return x
+        # i = 1
+        #进行了很多没有必要的比较，导致时间溢出
+        # Last executed input:1675671279 Time Limit Exceeded 
+        # while i**2<=x :
+        #     if (i+1)**2 > x:
+        #         return i
+        #     else:
+        #         i+=1
+        # while i <= x//2:
+        #     if i**2<=x and (i+1)**2 >x:
+        #         return i
+        #     i+=1
+        
+        #牛顿迭代法===想不到
+        
+            # y = x^2 + b
+            # x^2 - y = b 如果b足够小  |b|<=0.1
+            # 则x` = x
+            
+            # x = (x+y/x)/2 = (x^2+y)/2x  
+            # 2x^2 = x^2 + y
+            # 因为本身 y = x^2 -b 而b又足够小
+            
+        result = 1
+        while abs(result**2-x)>0.1:
+            result = (result+x/result)/2   #
+
+        return int(result)#result 是一个浮点型 
+        
+        #二分法
+        
+        
+        
+        
+                
