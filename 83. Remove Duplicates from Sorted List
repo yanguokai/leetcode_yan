@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        
+        #应该和以前的是一样的
+        #记住有序
+        p = head
+        #run简单的运行正常，submit报错，说明有些细节没有考虑到
+        #原来是没有考虑到空的情况
+        if not head:
+            return head
+        
+        while(p.next):
+            if p.val == p.next.val:
+                #p.next.next是否存在？ 假如p.next 是最后一个结点了，那p.next.next =None 也可以啊
+                p.next = p.next.next
+            else:
+                p = p.next
+            
+        return head
+    
+   
