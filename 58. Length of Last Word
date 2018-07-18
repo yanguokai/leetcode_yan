@@ -1,0 +1,17 @@
+class Solution:
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        #不能够使用python中的字符串的函数是吧
+        
+        length_s = len(s)
+        index = length_s - 1
+        #因为是要查找最后一个词的长度，所以从后开始遍历，先排掉末尾的空格，直到不为空格为止，记录索引，再往前走，找到为空的位置
+        while index>=0 and s[index]==" ":
+            index -= 1
+        temp = index
+        while index>=0 and s[index]!=" ":
+            index -= 1
+        return temp - index
