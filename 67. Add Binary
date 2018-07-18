@@ -1,0 +1,95 @@
+class Solution:
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        #二进制加法，和前面的十进制加1差不多吧
+        #字符串的形式保存，加法需要先转化成int ，然后考虑到进位
+        
+        #转化成list？
+        
+#         int_a = int(a)
+#         int_b = int(b)
+        
+#         list_int_a = list(int_a)
+#         list_int_b = list(int_b)
+        
+#         #对应位数相加才行
+#         len_a = len(list_int_a)
+#         len_b = len(list_int_b)
+
+        #先不要考虑转化成int，再求加法的时候转化一下就行
+        #按位数相加，比较长度，一般是长的当被加数，短的当加数
+        
+        len_a = len(a)
+        len_b = len(b)
+        if len_a < len_b:
+            a , b = b , a
+        print("长度大的为%s"%a)
+        print("长度小的为%s"%b)
+        
+        # i = len_b - 1 
+        # 前面替换过之后 这个地方没有替换过来，导致越界引用
+
+        # i = len_a - 1
+        # j = len_b - 1
+        i = len(a) - 1
+        j = len(b) - 1
+        temp_p = 0
+        list_a = list(a)
+        while i >=0:
+            temp_a = a[i]
+            if j>=0:
+                # Line 41: IndexError: string index out of range
+                print("j%d"%j)
+                temp_b = b[j]
+                temp = int(temp_a) + int(temp_b) + temp_p
+                #进位应该是只能一次进1吧
+                temp_p = temp // 2
+                temp = temp % 2
+                #a当前是一个字符串，也是一个数组存放的啊 ，但是字符串是一个不可变
+                list_a[i] = str(temp)
+            else:
+                if temp_p ==1:
+                    temp = int(temp_a) + temp_p
+                    temp_p = temp // 2
+                    temp = temp % 2
+                    #a当前是一个字符串，也是一个数组存放的啊 ，但是字符串是一个不可变
+                    list_a[i] = str(temp)
+                else:
+                    break
+            i -= 1
+            j -= 1
+            
+            #需要将当前位获得的值赋值给当前位
+            #Line 44: TypeError: 'str' object does not support item assignment
+            # a[i] = str(temp)
+            
+            # if temp_p == 1:
+            #     #这个肯定不是这样判断的了
+            #     i -= 1
+            # else:
+            #     return a
+            
+            #i 肯定是需要往前移的，只需要记录下进位数就行 不管是0还是1，都加在上面
+            
+        #也不是这样判断是否插入1的，需要判断最长的那位是不是发生变化了
+#         if i<0:
+            
+#             a.insert(0,1)
+
+        #判断退出条件
+        #j<0   需要判断temp_p
+        if i<0 and temp_p==1:
+            list_a.insert(0,"1")
+            #否则就是直接在+1操作？
+            
+        s_a = "".join(s for s in list_a)
+            
+        return s_a
+            
+        
+        
+        
