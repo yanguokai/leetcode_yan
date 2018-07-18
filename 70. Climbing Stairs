@@ -1,0 +1,25 @@
+class Solution:
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        #一次走一步或者是二步，有多少种不同的走法
+        #动态规划题  （感觉这块每次都出问题）
+        # 举例前几个结果，找出数列规律,肯定是在前面的基础上完成的
+        # 1-1 2-2 3-3 4-5 5-8 6-13
+        # d(p) = d(p-1)+d(p-2)
+        #用数组表示
+        if n<=2:
+            return n
+        d = [0 for _ in range(n)]
+        # d = []
+        d[0] = 1
+        d[1] = 2
+        i = 2
+        while(i<n):
+            d[i] = d[i-1]+d[i-2]
+            
+            i+=1
+        return d[i-1]
+    
