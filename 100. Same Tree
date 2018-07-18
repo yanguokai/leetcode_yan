@@ -1,0 +1,44 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """
+        #先序遍历来判断吗？，中间部分的null需要显示出来，最后面的null没有显示出来
+        
+        #但是先序遍历也是一个递归函数啊，需要吗,递归遍历是写出来的，不需要再去添加其他的
+        
+        
+        #参考了其他的
+        
+        
+        
+        #p 和 q 都不存在时 返回true
+        if not p and not q:
+            return True
+        #p 和 q 只有一个不存在时 返回false
+        elif not p or not q:
+            return False
+        # p 和 q都存在的时候，先判断根值是否相等，如果不相等就返回false，否则递归判断左右子树
+        elif p.val!=q.val:
+            return False
+        
+        else:
+            return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+        
+            
+            
+        #层级遍历
+        
+        #二叉树，直接利用下标索引就行了吧
+        
+        
+        
