@@ -1,0 +1,49 @@
+class Solution:
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        
+        """
+        #列表尾部元素加1返回？ 
+        digits[-1]+=1
+        
+        #加法需要考虑到进位吧？
+        return digits
+        
+        """
+        
+        #十进制
+        
+        index = len(digits)-1
+        while index>=0:
+            temp = digits[index]
+            temp = temp + 1
+            #获取进位数 1 或者 0
+            temp_p = temp // 10
+            #如果是1的话就需要处理，往前位加1，相当于index往前移一位，需要考虑index=0的时候，不能够在往前走，为溢出。
+            #原测试没有考虑到溢出的情况，比如[9],直接返回的是[1,0]，相当于所有的元素往后移一位，在0的位置上插入
+            #如果是0的话就不需要
+            digits[index] = temp % 10
+            if temp_p == 1:
+                index -=1
+            else:
+                return digits
+            
+        #处理溢出的情况，在0的位置上插入1
+        # index = len(digits)-1
+        # while index>=0:
+        #     # Line 37: IndexError: list assignment index out of range 为什么这里就需要考虑？
+        #     digits[index+1] =digits[index]
+        # digits[0] = 1
+        # return digits
+        
+        #python插入元素的方法不是像上面那样的，上面没有申请空间吧。。。
+        digits.insert(0,1)
+        return digits
+            
+
+            
+        
+        
