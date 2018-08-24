@@ -15,5 +15,23 @@ class Solution:
         return [None,None]
         
         
+class Solution:
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+       
+        hashmap = {}
         
+        #关键字enumerate不会写
+        for index,value in enumerate(nums):
+            hashmap[value] = index
+        
+        for index,value in enumerate(nums):
+             if (target - value) in hashmap:
+                    index2 = hashmap[target - value] #这个应该使用的是[]
+                    if index != index2:
+                        return [index,index2]  #这个不需要加1
         
