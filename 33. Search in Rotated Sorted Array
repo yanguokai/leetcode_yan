@@ -1,0 +1,51 @@
+class Solution:
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        #这个以前有看过，而且可能还做过，最后再在线下笔试的时候就想不清楚。 
+        #线下笔试的时候是在旋转数组中 找出最小值
+        #肯定是自己有一个习惯的思维，比如遍历一定是从0开始从左到右遍历的。
+        
+        #还有一些其他的问题，必须在这次过程中，都给整理出来
+        
+        #自己对二分查找的实质没有理解清楚，对是递归调用还是利用循环 比较模糊
+        
+        #对条件的判别不清楚
+        
+        #以下标为0的具体形式
+        low = 0
+        high = len(nums) - 1
+        #是不是high需要减1呢？
+        #中值的求法：mid = (low +high )//2  表示向下取整   mid = low + (high - low)//2
+        mid = (low + high )//2
+        
+        while low <= high: # low != high  low < high 这些条件应该选哪种
+            mid = (low + high )//2
+            
+            if nums[mid]==target: #中值的时候先判断一下，这个在一开始来看是碰运气的，但是最后一次就会压缩空间得到最后一个值的时候就是明确
+                return mid
+            else:
+                #这个时候 会存在着几个边界值，要一一判断吗？
+                #是用中值本身来判断区间吗？还是用target来判断。
+                #就是这些判断 自己分的不是很清楚，代码肯定出问题，那肯定没有通过率
+                #只要用low 和mid来进行判断，就知道mid是在原本有序，还是翻转有序，还是又是一个新的数组中。
+                if nums[low]<=nums[mid]:
+                    # 这是保证这个区间内是有序的。
+                    if nums[low] <= target and target <= nums[mid]:
+                        #如果target在这个空间里
+                        high = mid
+                    else:#这个是只要不在这个区间内就行，不用考虑 target是否是 < nums[low]?
+                        low =  mid + 1
+                else:
+                    #mid是属于翻转过的了
+                    if nums[mid]<target and target <= nums[high]:
+                        #target 在翻转过的有序区间中
+                        low = mid + 1
+                    else:
+                        high = mid-1
+            
+        return -1
+        
