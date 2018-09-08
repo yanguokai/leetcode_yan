@@ -1,0 +1,59 @@
+class Solution:
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        #前面使用第一个方法，合并两个有序数组，然后再求中值的方法，竟然被ac了
+        #现在来实现其他的。
+        
+        #有序，中位数，他们的特征
+        #两个中位数将两个数组划分成了四个部分。
+        
+        # A1 Z1 A2     B1 Z2 B2
+        
+        #我们不去考虑这个可能是这样可能是那样，不同的情况，就判断如何这个条件存在的话 会是怎么样
+        
+        #每次中值的选取都需要判断是奇偶吗，要划分一个数组不一定要准确的中值，假设是一个偶数的，以中值的前一个来划分也行吧
+        #一个是得到中值，一个是二分的索引，这个是不一样的。不论奇偶可以得到二分索引，求中值 最后判断 就需要考虑奇偶了
+        
+#         m1 = (0 + len(nums1))//2
+#         m2 = (0 + len(nums2))//2
+#         Z1 = nums1[m1]
+#         Z2 = nums2[m2]
+        
+#         #排除一些一定是不满足条件的
+#         if Z1 < Z2:
+          #查找k大值  那么中值对应的k大值 应该怎么表示
+        #奇数时
+        if (len(nums1) + len(nums2)) %2 != 0:
+            k = (len(nums1) + len(nums2)) //2
+            return self.findK(nums1,nums2,k)
+        else:
+            k1 = (len(nums1) + len(nums2)) //2 + 1
+            k2 = (len(nums1) + len(nums2)) //2 
+            return (self.findK(nums1,nums2,k1) + self.findK(nums1,nums2,k2))/2
+        
+    def findK(self,nums1,nums2,K):
+        #什么时候停止返回
+        if not nums1:
+            return nums2[K]
+        if not nums2:
+            return nums2[K]
+        if K==0:
+            return min(nums1[0],nums2[0])
+        mk = K//2 - 1
+        if nums1[mk] < nums2[mk]:
+            # 可以删除A前mk个值，因为确定不会在这个空间内找到第k大的值
+            nums1 = nums1[mk:]
+            return self.findK(nums1,nums2,K-mk)
+        elif nums1[mk] > nums2[mk]:
+            nums2 = nums2[mk:]
+            return self.findK(nums1,nums2,K-mk)
+        else:
+            #两者mk个位置上值相等，说明第k大的值就是这个mk对应的值
+            # 怎么理解
+            return nums1[mk]
+        
+        #还存在错误
