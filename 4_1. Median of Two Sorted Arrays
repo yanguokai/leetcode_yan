@@ -1,0 +1,80 @@
+#虽然解决办法比较暴力，但是至少还是解决 被AC了。 时间尽然是被允许的？O(log(m+n))???
+class Solution:
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        #两个有序数组，求合并中值
+        
+        #单有序中值的求解
+        #奇数为单独一个值
+        #偶数需要求平均
+        
+        #肯定不是直接合并 之后再取中值把
+        #要不要这种方法试一下
+        #合并两个数组
+        nums3 = []
+        i = 0
+        j = 0
+        #存在几个问题，1个是没有考虑到nums2 比 nums1 大的情况
+        # i 一直再变化 也是个错的
+        while i < len(nums1) and j<len(nums2):
+            
+            if nums1[i]<=nums2[j]:
+
+                nums3.append(nums1[i])
+                i += 1
+            else:
+                nums3.append(nums2[j])
+                j += 1
+        if i < len(nums1):
+            nums3 += nums1[i:]
+        if j < len(nums2):
+            nums3 += nums2[j:]
+        print(nums3)
+        low = 0
+        high = len(nums3) -1 
+        mid = (low + high)//2
+        if len(nums3)%2!=0:
+            return nums3[mid]
+        else:
+            return ( nums3[mid]+nums3[mid + 1] )/2
+
+#一开始错误的部分            
+# class Solution:
+#     def findMedianSortedArrays(self, nums1, nums2):
+#         """
+#         :type nums1: List[int]
+#         :type nums2: List[int]
+#         :rtype: float
+#         """
+#         #两个有序数组，求合并中值
+        
+#         #单有序中值的求解
+#         #奇数为单独一个值
+#         #偶数需要求平均
+        
+#         #肯定不是直接合并 之后再取中值把
+#         #要不要这种方法试一下
+#         #合并两个数组
+#         nums3 = []
+#         j = 0
+#         for i in range(len(nums1)):
+#             if j < len(nums2):
+#                 if nums1[i]<=nums2[j]:
+#                     nums3.append(nums1[i])
+#                 else:
+#                     nums3.append(nums2[j])
+#                     j += 1
+#             else:
+#                 nums3.append(nums1[i])
+#         low = 0
+#         high = len(nums3) -1 
+        
+#         mid = (low + high)//2
+#         if len(nums3)%2!=0:
+#             return nums3[mid]
+#         else:
+#             return ( nums3[mid]+nums3[mid + 1] )/2
