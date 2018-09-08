@@ -1,0 +1,40 @@
+class Solution:
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        #我需要的是这种能够解决问题的自信，在上面那个题上AC的基础上，已经有了，所以题目也不在于多。刷的慢也不是很重要的事了
+        
+        #刷不出来就是题目太难了，而不是自己简单的也刷不出来
+        
+        #听说算法岗人太多 不怎么招人了，都是现场手撕代码
+        
+        if len(nums)==1:
+            return nums[0]
+        low = 0
+        high = len(nums) - 1
+        
+        while low <= high:
+            mid = (low + high)//2
+            #判断没有旋转
+            if nums[low] < nums[high]:
+                return nums[low]
+            #相等的部分旋转完成
+            elif nums[low] > nums[high]:
+                if nums[low] <= nums[mid]:
+                    #说明mid 属于大的部分，最小值在mid的右边
+                    low = mid + 1
+                else:
+                    #说明mid在翻转的部分，最小值在mid的左边
+                    high = mid
+            else:
+                # 翻转重复的部分没有完全，忽略，继续往后移动一位
+                low += 1
+        
+        #注意 return nums[high]是关键的一个点，
+     
+        # 所以最后nums[low]=nums[high] 使得low + 1 low 会在一直相等的时候越界退出循环 但是没有返回
+        return nums[high]
+                
+            
