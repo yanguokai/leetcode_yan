@@ -1,0 +1,50 @@
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        #两个数之和为target 叫做twosum
+        #三个数之和为target=0的叫做threesum？  假设这个target！=0呢
+        
+        k = 3
+        target = 0
+        if len(nums)<k:
+            return []
+        nums = sorted(nums)
+        low = 0
+        length = len(nums)
+        res = []
+        for i in range(length-k+1):
+            if i==0 or nums[i] > nums[i-1]:
+                left = i + 1
+                right = length - 1
+                while left < right:  #习惯性的东西真的很不容易注意，这个right 自己写成high已经报了很多次了
+                    if nums[i] + nums[left] + nums[right] == target:
+                        res.append([nums[i] , nums[left] , nums[right]])
+
+                        left += 1
+                        right -= 1
+                        # while left < right:
+                        #     if nums[left] == nums[left-1]:
+                        while left < right and nums[left]==nums[left-1]:
+                            left += 1
+                        while left < right and nums[right]==nums[right+1]:
+                            # if nums[right] == nums[right + 1]:
+                            right -= 1
+                    elif nums[i] + nums[left] + nums[right] < target:
+                        #有下面的判断的时候会时间溢出
+                        # while left < right:
+                        #     left +=1
+                        #     if nums[left]>nums[left-1]:
+                        #         break
+                        left +=1
+
+                    else:
+                        # while left < right:
+                        #     right -=1
+                        #     if nums[right]<nums[right+1]:
+                        #         break
+                        right -= 1
+        return res
+                    
