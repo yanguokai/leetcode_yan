@@ -1,0 +1,37 @@
+class Solution:
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: bool
+        """
+        if not nums:
+            return False
+        
+        low = 0
+        high = len(nums) - 1
+        
+        while low <= high:
+            mid = (low + high )//2
+            
+            if nums[mid]== target:
+                return True
+            
+            #因为翻转是到后面去，所以直接先考虑，mid所在的前半区间是否是原来有序的
+            if nums[low] < nums[mid]: #数组中存在着重复，所以有等于的判断不能够进行区分 1 2 1 1 1 
+                if nums[low] <= target and target <=nums[mid]:
+                    #target 在前半原始有序空间
+                    high = mid
+                else:
+                    low = mid+1
+            elif nums[low] > nums[mid]:
+                #确定翻转，而且将可能重复的值给翻转完全，不是一半翻转情况
+                if nums[mid]< target and target <= nums[high]:
+                    #target 在这个翻转的空间中
+                    low = mid + 1
+                else:
+                    high = mid -1
+            else: #nums[low] = nums[mid]:
+                low += 1
+        return False
+                
