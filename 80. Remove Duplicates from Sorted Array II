@@ -1,0 +1,21 @@
+class Solution:
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        #思想比较重要，我的话就会直接从0开始，然后一个一个比，添加额外变量保存重复数。但是索引越界了，不知道是什么问题
+        k  = 2
+        if len(nums) <= k :
+            return len(nums)
+        
+        index = k
+        for i in range(k,len(nums)):
+            if nums[i]!=nums[index - 2]:
+                
+                nums[index] = nums[i]
+                #关键是这个index的索引更新位置
+                index += 1
+                
+        return index
+                
