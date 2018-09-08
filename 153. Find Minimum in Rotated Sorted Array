@@ -1,0 +1,83 @@
+class Solution:
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
+        minValue = [] #开始设置的最小值为什么好呢？0是最小吗
+        
+        low = 0
+        high = len(nums) - 1
+        
+        #判断是否是翻转空间
+        while low <=high:
+            #1不是翻转空间
+            if nums[low]<= nums[high]:
+                return nums[low]
+            #2翻转空间
+            else:
+                #二分查找法 划分空间
+                mid = (low + high)//2
+                #low-mid 原有序空间
+                if nums[low] > nums[mid]:
+                    high = mid
+                else:
+                    low = mid + 1
+        #终于自己做出来了，一开始有些想法判断是出现问题的，但是后面把前面的再删除 重新想之后，还是完成了
+        
+        #这个题 和翻转数组中查找比较类似，我以为自己以前做过，看到过，那次笔试的时候也是这样认为的，但是今天看了两个题，我想以前应该不是这个题。
+        #但是还是需要注意
+        
+        
+        
+        #附上前面的错误想法
+# class Solution:
+#     def findMin(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+        
+#         minValue = [] #开始设置的最小值为什么好呢？0是最小吗
+        
+#         low = 0
+#         high = len(nums) - 1
+        
+        
+        
+#         while low <= high:
+#             mid = (low + high)//2
+            
+#             #关键是怎么判断啊 ，一直拿最小值与中值判断？最初的最小值如何定义
+#             #还是说先判断旋转空间分布：
+            
+            
+#             #试图拆分三个空间，判断每个空间的最小值，加入到最小值列表中，再用min函数获取最小值  
+#             #Time Limit Exceeded  那程序有错吗
+            
+#             if nums[low] <= nums[mid]:
+#                 #这个是原始有序空间，所以最小值就是nums[low]了。
+#                 minValue.append(nums[low])
+            
+#             #这些low 和 high 要如何更新啊
+#             else:
+#                 #mid 落在正常+翻转空间内
+#                 if nums[mid] <= nums[high]:
+#                     minValue.append(nums[mid])
+#                 else:
+#                     low = mid + 1
+#             print(minValue)
+#         return min(minValue)
+    
+    
+                    
+                    
+                    
+
+                
+                    
+                
+            
+                    
+                
