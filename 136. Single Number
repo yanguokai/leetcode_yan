@@ -1,0 +1,14 @@
+class Solution:
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ''
+        #1.不能使用额外的空间 比如[]  2.使用异或来判断只出现过一次的情况  这个需要满足只有一个是single的情况
+        res = 0
+        for i in nums:
+            res ^= i
+            print(res)
+        
+        return res
