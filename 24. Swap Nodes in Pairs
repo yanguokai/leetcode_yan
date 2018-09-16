@@ -1,0 +1,34 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        #You may not modify the values in the list's nodes, only nodes itself may be changed.
+        #声明不可以通过交互结点的值来实现
+        
+        #注意这个地方的判断
+        if not head or not head.next:
+            return head
+        
+        #Pre 需要一开始构建吗？
+        
+        Pre = ListNode(-1)
+        Pre.next = head
+        Cur = head
+        Next = head.next
+        
+        #开始交互
+        Pre.next = Next
+        Cur.next = Next.next
+        Next.next = Cur
+        
+        Cur.next = self.swapPairs(Cur.next)
+        return Pre.next   #注意不是返回head
+        
