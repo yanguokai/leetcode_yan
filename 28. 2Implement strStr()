@@ -1,0 +1,20 @@
+class Solution:
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        if not needle:
+            return 0
+        for i in range(len(haystack)):
+            j = i
+            k = 0
+            while j < len(haystack) and k < len(needle) and haystack[j]==needle[k] : #注意先判断k是否越界索引 然后再能够使用访问
+                k += 1
+                j += 1
+            if k == len(needle):
+                return i
+        return -1
+            
+        #暴力求解，导致时间超时
